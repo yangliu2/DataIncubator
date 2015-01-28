@@ -1,5 +1,6 @@
 import java.lang.Math;
 
+public static main (argu[]){
 int[] occupied = new int[seats];
 int taken = 0;
 
@@ -11,4 +12,5 @@ while (taken <seats){
 		occupied[chose+2] = 1;
 		taken += 3;
 	}
+}
 }

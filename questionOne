@@ -1,0 +1,14 @@
+import java.lang.Math;
+
+int[] occupied = new int[seats];
+int taken = 0;
+
+while (taken <seats){
+	randomNumber (0,seats);
+	if (occupied[chose] == 0 && occupied[chose+2] == 0){
+		occupied[chose+1] = 2;
+		occupied[chose] = 1;
+		occupied[chose+2] = 1;
+		taken += 3;
+	}
+}

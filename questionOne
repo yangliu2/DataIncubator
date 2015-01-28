@@ -1,6 +1,7 @@
 import java.lang.Math;
 
 public static void main (String args[]){
+	
 	takeSeat(25);
 }
 

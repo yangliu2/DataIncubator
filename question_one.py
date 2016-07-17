@@ -39,24 +39,27 @@ def move(current, count, sum):
 
 # put all results in list and use numpy to calculate stats
 list = []
+prob = [] # probability
 by_seven = 0.0
 by_five = 0.0
 
 # repeat 1000 times to get reasonable stats
-for j in range(1001):
+for j in range(100001):
     # change the range to either 10 or 1024 according to question
     for i in range(1024):
         [current_pos, move_count, move_sum] = move(current_pos, move_count, move_sum)
         mod = move_sum % 1024
         list.append(mod)
         
-        # find probability
-        if (move_sum % 29 == 0):
-            by_seven += 1
-            if (move_sum % 23 == 0):
-                by_five += 1
+    # find probability, change to 23 given 29
+    if (move_sum % 29 == 0):
+        by_seven += 1
+        if (move_sum % 23 == 0):
+            by_five += 1
+    if (by_seven > 0):
+        prob.append(by_five/by_seven)
             
-print 'probability of divisible by 5 given it is divisible by 7', by_five/by_seven
-print np.mean(list)
+print 'probability of divisible by 5 given it is divisible by 7', np.mean(prob)
+print 'S mod 10 mean', np.mean(list)
 # use double precision for standard deviation
-print np.std(list, dtype=np.float64)
+print 'S mod 10 standard deviation', np.std(list, dtype=np.float64)

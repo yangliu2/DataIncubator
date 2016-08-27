@@ -15,9 +15,9 @@ def index():
 		return render_template('index.html')
 	else:
 
-		return render_template('googlemap.html'
+		return render_template('googlemap.html')
   
 if __name__ == '__main__':
-  app.run(port=33507)
+	app.run(port=33507)
 
 # injust some changes

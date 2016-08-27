@@ -14,11 +14,8 @@ def index():
 	if request.method == 'GET':
 		return render_template('index.html')
 	else:
-		#request
-		symbol = request.form['ticker'].upper()
-		print symbol
-		script,div = get_graph(symbol)
-		return render_template('graph.html', name=symbol, script=script, div=div)
+
+		return render_template('googlemap.html'
   
 if __name__ == '__main__':
   app.run(port=33507)

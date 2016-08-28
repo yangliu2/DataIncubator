@@ -14,6 +14,15 @@ def index():
 	if request.method == 'GET':
 		return render_template('index.html')
 	else:
+		budget = request.form['budget_upper']
+		built = request.form['built']
+		cusine = request.form['food']
+		food_section = request.form['food_level']
+		interests = request.form['interests']
+		grade = request.form['school']
+
+		print budege, built, cusine, food_section, interests, grade
+
 
 		return render_template('googlemap.html')
   

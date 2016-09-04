@@ -16,12 +16,12 @@ app = Flask(__name__)
 
 def selectHouse(budget, built, cusine, food_section, interests, grade):
 	# set home searching parameters
-	budget_max = budget
-	budget_min = budget - 100000
-	built_year = built #built year cutoff
-	#grade = 8 #average school grade needed
+	budget_max = int(budget)
+	budget_min = int(budget) - 100000
+	built_year = int(built) #built year cutoff
+	grade = int(grade) #average school grade needed
 	#cusine = 'Chinese'
-	#food_section = 5 #number of zipcode areas with top restuarant
+	food_section = int(food_section) #number of zipcode areas with top restuarant
 	#interest = 'biking'
 
 	# import data from NYC Property Valuation and Assessment data 
@@ -157,8 +157,26 @@ def selectHouse(budget, built, cusine, food_section, interests, grade):
 	links['Status'] = status
 
 	links_sale = links.loc[links['Status'] == 'For Sale']
+	
+	# this is the lat,long array going to be ploted
+	latitudes, longitudes = links_sale['Latitude'].tolist(), links_sale['Longitude'].tolist()
+
+	# convert location from string to float
+	latitudes = [float(i) for i in latitudes]
+	longitudes = [float(i) for i in longitudes]
 
 	#need to generate javascripts for the output html file
+	script = "var markes = ["
+
+	for i in range(len(latitudes)):
+	    if i < len(latitudes) - 1:
+	        script += "[ '"+ links_sale['Zillow ID'].iloc[i] + "', " + str(latitudes[i]) + ", " + str(longitudes[i]) + ", '" + links_sale['Zillow Links'].iloc[i] + "' ],"
+	    else:
+	        script += "[ '"+ links_sale['Zillow ID'].iloc[i] + "', " + str(latitudes[i]) + ", " + str(longitudes[i]) + ", '" + links_sale['Zillow Links'].iloc[i] + "' ]"
+	#close bracket
+	script += "];"
+	
+	return script, np.median(latitudes), np.median(longitudes)
 
 @app.route('/')
 def main():
@@ -177,9 +195,9 @@ def index():
 		grade = request.form['school']
 
 		#print budget, built, cusine, food_section, interests, grade
-		markers = selectHouse(budget, built, cusine, food_section, interests, grade)
+		script, lat, long = selectHouse(budget, built, cusine, food_section, interests, grade)
 
-		return render_template('googlemap.html')
+		return render_template('googlemap.html', script=script, latitude=lat, longitude=long)
   
 if __name__ == '__main__':
 	app.run(port=33507)

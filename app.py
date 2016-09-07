@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect
 import bokeh.io, bokeh.plotting, bokeh.models
 from bokeh.plotting import figure
 from bokeh.embed import components 
+from ediblepickle import checkpoint
+import string
 
 import numpy as np
 import pandas as pd
@@ -13,6 +15,12 @@ import time
 import json
 
 app = Flask(__name__)
+
+cache_dir = 'cache'
+if not os.path.exists(cache_dir):
+    os.mkdir(cache_dir)
+
+@checkpoint(key=string.Template('stride.csv'), work_dir=cache_dir, refresh=True)
 
 def selectHouse(budget, built, cusine, food_section, interests, grade):
 	# set home searching parameters
@@ -166,7 +174,7 @@ def selectHouse(budget, built, cusine, food_section, interests, grade):
 	longitudes = [float(i) for i in longitudes]
 
 	#need to generate javascripts for the output html file
-	script = "var markes = ["
+	script = "var markers = ["
 
 	for i in range(len(latitudes)):
 	    if i < len(latitudes) - 1:
@@ -175,7 +183,7 @@ def selectHouse(budget, built, cusine, food_section, interests, grade):
 	        script += "[ '"+ links_sale['Zillow ID'].iloc[i] + "', " + str(latitudes[i]) + ", " + str(longitudes[i]) + ", '" + links_sale['Zillow Links'].iloc[i] + "' ]"
 	#close bracket
 	script += "];"
-	
+
 	return script, np.median(latitudes), np.median(longitudes)
 
 @app.route('/')

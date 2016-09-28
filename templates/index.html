@@ -6,21 +6,30 @@
   <title>Finding Home | Pazoto </title>
   <meta name="title" content="Finding Home | Panzoto" />
   <meta name="description" content="Finding your dream home" />
-  <link rel="image_src" href="/images/notify_better_image.png" />
   <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no">
 
-  <meta content="http://www.thepetedesign.com/demos/onepage_scroll_demo.html" property="og:url" />
-  <meta content="http://www.thepetedesign.com/images/onepage_scroll_image.png" property="og:image" />
-  
   <link rel="shortcut icon" id="favicon" href="favicon.png">
   <meta name="author" content="Yang Liu">
 
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Pacifico:400' rel='stylesheet' type='text/css'>
   
+  <!-- load bokeh
+  <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.2.min.css" type="text/css" />    
+  <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.2.min.js"></script>
+  <script type="text/javascript"> Bokeh.set_log_level("info");</script>
+  -->
+
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.js"></script>
   <script type="text/javascript" src="http://panzoto.com/stylefiles/jquery.onepage-scroll.js"></script>
   <link href='http://panzoto.com/stylefiles/onepage-scroll.css' rel='stylesheet' type='text/css'>
+
+  <!-- Other JS plugins can be included here -->
+
+  <script>
+    $(document).foundation();
+  </script>
+
   <style>
     html {
       height: 100%;
@@ -215,7 +224,7 @@
       -webkit-box-sizing: border-box;
       background: rgba(255, 255, 255, 0.25);
       font-weight: bold;
-      font-size: 13px;
+      font-size: 20px;
       color: #000;
       -webkit-transition: all 500ms ease-in-out;
       -moz-transition: all 500ms ease-in-out;
@@ -258,7 +267,8 @@
 
     .main section.page1 {
       background:rgb(230, 217, 200);
-      /* background-image: url("../images/house.jpg"); */
+      background-image: url("http://panzoto.com/images/house.jpg");
+      background-size:100%;
     }
     .main section.page1 h1 {
       float: none;
@@ -269,13 +279,14 @@
       padding: 0;
       margin-bottom: 15px;
       font-size: 44px;
-      color: black;
+      font-weight: bold;
+      color: white;
     }  .main section.page1 h2 {
-        font-size: 18px;
+        font-size: 25px;
         display: block;
-        color: rgba(0,0,0,0.85);
+        color: white;
+        font-weight: bold;
         text-align: center;
-        max-width: 435px;
         width: 100%;
         line-height: 160%;
       }
@@ -299,7 +310,7 @@
       margin-left: -1095px;
     }
     .main section.page2 .page_container {
-      margin-top: 240px;
+      margin-top: 0px;
       overflow: hidden;
     }
     .main section.page2 h1 {
@@ -322,6 +333,13 @@
       }
     .viewing-page-2 .back a {
       color: #FFF;
+      }
+    .viewing-page-1 .back{
+      background: rgba(0, 0, 0, 0.25);
+      color:  #FFEFD5;
+      }
+    .viewing-page-1 .back a {
+      color:  #FFEFD5;
       }
     .main section.page3 {
       background:url(tilted-phone.png) no-repeat 156px -150px ;
@@ -497,14 +515,50 @@
 
       <section class="page1">
         <div class="page_container">
-          <h1>Finding Home </h1>
-          <h2>FINDING YOUR DREAM HOME IN NEW YORK CITY</h2>
+          <p><br><br>
+          <h1>Finding a Home in NYC</h1><br><br>
+          <h2>Want to live in Manhattan? <br><br>
+          Moving to a better school district? <br><br>
+          Love French cuisine? <br><br>
+          </h2>
       </section>
 
       <section class="page2">
         <div class="page_container">
-          <h1>Analytics goes here</h1>
-          <h2>This page will have the graphs that indicate what infomation predict the pricing of homes and how the price of homes are related to these parameters</h2>
+          <h1>Manhattan is 6x more expensive</h1>
+          <br><br><br>
+          
+          <img src="http://panzoto.com/images/boro.png" alt="By Neighborhood">
+  
+        </div>
+      </section>
+
+
+      <section class="page2">
+        <div class="page_container">
+          <h1>Median Home price by zipcode</h1>
+          <br><br><br>
+          
+            <iframe width="100%" height="520" frameborder="0" src="https://yangliu2.carto.com/viz/21a3339e-8501-11e6-8854-0e233c30368f/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+  
+        </div>
+      </section>
+
+      <section class="page2">
+        <div class="page_container">
+          <h1>Education by school district</h1>
+          <br><br><br>
+          
+            <iframe width="100%" height="520" frameborder="0" src="https://yangliu2.carto.com/viz/ec6b14bc-7d3a-11e6-afd1-0e05a8b3e3d7/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+  
+        </div>
+      </section>
+
+            <section class="page2">
+        <div class="page_container">
+          <h1>Feature contribution to home price</h1>
+          <br><br><br>
+          <img src="http://panzoto.com/images/feature.png" alt="By Neighborhood">
   
         </div>
       </section>
@@ -515,12 +569,163 @@
             <br><br><br>
             <form id='input' method='post' action='index'>
 
-            <p> <b>Budget</b> &nbsp;<input type='text' name='budget_upper' placeholder="200000" />
-            <p> <b>Year built after</b> &nbsp;<input type='text' name='built' placeholder="1920" />
-            <P> <b>Food preference</b> &nbsp;<input type='text' name='food' placeholder="Chinese" />
-            <p> <b>Cuisine importance</b> &nbsp;<input type='text' name='food_level' placeholder="1-10, 1 for more imporant" />
-            <p> <b>Interests</b> &nbsp;<input type='text' name='interests' placeholder="bicycle" />
-            <p> <b>School grade</b> &nbsp;<input type='text' name='school' placeholder="1-10, higher the better" />
+            <p> <b>Budget</b> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <select name="budget_upper" form="input">
+                <option value="200000">Less than $200,000</option>
+                <option value="250000">$250,000</option>
+                <option value="300000">$300,000</option>
+                <option value="350000">$350,000</option>
+                <option value="400000">$400,000</option>
+                <option value="450000">$450,000</option>
+                <option value="500000">$500,000</option>
+                <option value="550000">$550,000</option>
+                <option value="600000">$600,000</option>
+                <option value="650000">$650,000</option>  
+                <option value="700000">$700,000</option>
+                <option value="750000">$750,000</option>
+                <option value="800000">$800,000</option>
+                <option value="850000">$850,000</option>
+                <option value="900000">$900,000</option>
+                <option value="950000">$950,000</option>
+                <option value="10000000">More than 1 million</option>   
+              </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <input type="range" min="1" max="10" value="5" /></p>              
+
+            <p> <b>School grade</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+              <select name="school" form="input">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>                  
+              </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <input type="range" min="1" max="10" value="5" /></p>
+
+            <p> <b>Crime rate filter</b> &nbsp;&nbsp;
+
+              <select name="crime" form="input">
+                <option value="violent">Violent Crimes</option>
+                <option value="none_violent">None Vilent Crimes</option>                 
+              </select>           
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="range" min="1" max="10" value="5" /></p>
+
+            <p> <b>Year built after</b> &nbsp;&nbsp;&nbsp;&nbsp; 
+
+              <select name="built" form="input">
+                <option value="1880">1880</option>
+                <option value="1890">1890</option>
+                <option value="1900">1900</option>
+                <option value="1910">1910</option>
+                <option value="1920">1920</option>
+                <option value="1930">1930</option>
+                <option value="1940">1940</option>
+                <option value="1950">1950</option>
+                <option value="1960">1960</option>
+                <option value="1970">1970</option>
+                <option value="1980">1980</option>
+                <option value="1990">1990</option>
+                <option value="2000">2000</option>
+                <option value="2010">2010</option>
+                   
+              </select>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="range" min="1" max="10" value="5" /></p>
+            
+            <P> <b>Food preference</b> &nbsp;&nbsp;
+            
+              <select name="food" form="input">
+                <option value="Afghan">Afghan</option>
+                <option value="African">African</option>
+                <option value="American">American</option>
+                <option value="Armenian">Armenian</option>
+                <option value="Asian">Asian</option>
+                <option value="Australian">Australian</option>
+                <option value="Bagels/Pretzels">Bagels/Pretzels</option>
+                <option value="Bakery">Bakery</option>
+                <option value="Bangladeshi">Bangladeshi</option>
+                <option value="Brazilian">Brazilian</option>
+                <option value="Cajun">Cajun</option>
+                <option value="Californian">Californian</option>
+                <option value="Caribbean">Caribbean</option>
+                <option value="Chicken">Chicken</option>
+                <option value="Chilean">Chilean</option>
+                <option value="Chinese">Chinese</option>
+                <option value="Continental">Continental</option>
+                <option value="Creole">Creole</option>
+                <option value="Czech">Czech</option>
+                <option value="Delicatessen">Delicatessen</option>
+                <option value="Donuts">Donuts</option>
+                <option value="Eastern European">Eastern European</option>
+                <option value="Egyptian">Egyptian</option>
+                <option value="English">English</option>
+                <option value="Filipino">Filipino</option>
+                <option value="French">French</option>
+                <option value="Fruits/Vegetables">Fruits/Vegetables</option>
+                <option value="German">German</option>
+                <option value="Greek">Greek</option>
+                <option value="Hamburgers">Hamburgers</option>
+                <option value="Hawaiian">Hawaiian</option>
+                <option value="Hotdogs">Hotdogs</option>
+                <option value="Ice Cream, Gelato, Yogurt, Ices">Ice Cream, Gelato, Yogurt, Ices</option>
+                <option value="Indian">Indian</option>
+                <option value="Indonesian">Indonesian</option>
+                <option value="Iranian">Iranian</option>
+                <option value="Irish">Irish</option>
+                <option value="Japanese">Japanese</option>
+                <option value="Jewish/Kosher">Jewish/Kosher</option>
+                <option value="Juice, Smoothies, Fruit Salads">Juice, Smoothies, Fruit Salads</option>
+                <option value="Korean">Korean</option>
+                <option value="Latin">Latin</option>
+                <option value="Mediterranean">Mediterranean</option>
+                <option value="Mexican">Mexican</option>
+                <option value="Middle Eastern">Middle Eastern</option>
+                <option value="Moroccan">Moroccan</option>
+                <option value="Nuts/Confectionary">Nuts/Confectionary</option>
+                <option value="Pakistani">Pakistani</option>
+                <option value="Pancakes/Waffles">Pancakes/Waffles</option>
+                <option value="Peruvian">Peruvian</option>
+                <option value="Pizza">Pizza</option>
+                <option value="Polish">Polish</option>
+                <option value="Polynesian">Polynesian</option>
+                <option value="Portuguese">Portuguese</option>
+                <option value="Russian">Russian</option>
+                <option value="Salads">Salads</option>
+                <option value="Sandwiches">Sandwiches</option>
+                <option value="Scandinavian">Scandinavian</option>
+                <option value="Seafood">Seafood</option>
+                <option value="Soul Food">Soul Food</option>
+                <option value="Soups">Soups</option>
+                <option value="Southwestern">Southwestern</option>
+                <option value="Spanish">Spanish</option>
+                <option value="Steak">Steak</option>
+                <option value="Tapas">Tapas</option>
+                <option value="Tex-Mex">Tex-Mex</option>
+                <option value="Thai">Thai </option>
+                <option value="Turkish">Turkish</option>
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Vietnamese/Cambodian/Malaysia">Vietnamese/Cambodian/Malaysia</option>                   
+              </select>
+
+            &nbsp;&nbsp;<input name='food_selection' type="range" min="1" max="10" value="5" />
+            
+            <!-- interestes>
+            <p> <b>Interests</b> &nbsp;<input type='text' name='interests' placeholder="bicycle">&nbsp;&nbsp;<input type="range" min="1" max="10" value="5" /></p>
+            -->
+
           
           <div class="btns">
             <input type="submit" value="Submit" class="reload btn">
@@ -528,16 +733,118 @@
         </div>
       </section>
 
-      <section class="page4">
+      <section class="page2">
         <div class="page_container">
-          <h1>4th page</h1>
+          <h1>Recommendations</h1>
+          <div id="map" style="width: 900px; height: 500px;"></div>
+            <script>
+
+              function initMap() {
+
+                // var myLatLng = {lat: 40.58796, lng: -73.984478};
+                var myLatLng = {lat: {{ latitude | safe }}, lng: {{ longitude | safe }}};
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 11,
+                  center: myLatLng
+                });
+
+                // add each marker
+                /*
+                var marker = new google.maps.Marker({
+                  position: myLatLng,
+                  map: map,
+                  title: 'Zillow Locations',
+                  url: 'http://www.zillow.com/homedetails/115-Bay-Ridge-Ave-Brooklyn-NY-11220/30691966_zpid/'
+                });
+                */
+
+                /*
+                var markers = [
+                    ['2102152090',
+                     40.5922,
+                     -73.9887,
+                     'http://www.zillow.com/homedetails/162-Bay-43-St-1A-Brooklyn-NY-11214/2102152090_zpid/'
+                    ], 
+
+                    ['112078252',
+                     40.58796,
+                     -73.984478,
+                     'http://www.zillow.com/homedetails/26-Bay-50th-St-3B-Brooklyn-NY-11214/112078252_zpid/'
+                    ],
+                    ['2099301632',
+                     40.583672,
+                     -73.986096,
+                     'http://www.zillow.com/homedetails/171-Bay-52-St-Brooklyn-NY-11214/2099301632_zpid/'
+                    ],
+                    ['30715080',
+                     40.60208,
+                     -74.007655,
+                     'http://www.zillow.com/homedetails/171-Bay-52-St-Brooklyn-NY-11214/2099301632_zpid/'
+                    ],
+                    ['68314328',
+                     40.599535,
+                     -73.994709,
+                     'http://www.zillow.com/homedetails/2232-Benson-Ave-3B-Brooklyn-NY-11214/68314328_zpid/'
+                    ]
+                ];
+                */
+                
+                {{ script | safe }}
+
+                for (var i = 0; i < markers.length; i++) {
+                  var place = markers[i];
+                  var marker = new google.maps.Marker({
+                    position: {lat: place[1], lng: place[2]},
+                    map: map,
+                    title: place[0],
+                    url: place[3]
+                  });
+
+                  // function so clicking url works
+                  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                      window.location.href = marker.url;
+                    }
+                  })(marker, i));
+                }
+
+
+              }
+
+              // set zoom level according to markers
+              if (GBrowserIsCompatible()) {
+              var map = new GMap2(document.getElementById("map"));
+              var markerBounds = new GLatLngBounds();
+
+              for (var i = 0; i < 10; i++) {
+                 var randomPoint = new GLatLng( 39.00 + (Math.random() - 0.5) * 20, 
+                                               -77.00 + (Math.random() - 0.5) * 20);
+
+                 map.addOverlay(new GMarker(randomPoint));
+                 markerBounds.extend(randomPoint);
+              }
+
+              map.setCenter(markerBounds.getCenter(), 
+                            map.getBoundsZoomLevel(markerBounds));
+           }
+
+            </script>
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGKFHR7dznhbva6GSdg8mor63OE0IvVLg&callback=initMap">
+            </script>
+
         </div>
       </section>
 
+
     </div>
 
+
+
+
     <!-- top bar -->
-    <div class=back> <a id="home">Home</a> | <a id="analysis">Analysis</a> | <a id="search">Search</a> </div>
+    <div class=back> <a id="home">Home</a> | <a id="analysis">Analysis</a> | <a id="search">Search</a> | <a id="result">Result</a> </div>
     <script>
       $( "#home" ).click(function() {
         $(".main").moveTo(1);
@@ -546,7 +853,10 @@
         $(".main").moveTo(2);
       });
       $( "#search" ).click(function() {
-        $(".main").moveTo(3);
+        $(".main").moveTo(6);
+      });
+      $( "#result" ).click(function() {
+        $(".main").moveTo(7);
       });
     </script>
   </div>

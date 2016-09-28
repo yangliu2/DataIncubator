@@ -163,7 +163,12 @@ def selectHouse(budget, built, cusine, food_section, interests, grade):
 
 	links['School Rating'] = ratings
 	links['Status'] = status
-
+	
+	#save the zillow results in a csv
+	today_date = time.strftime("%d_%m_%Y_%H_%M_%S")
+	filename = 'ZillowFiles/Zillow' + today_date + '.csv'
+	links.to_csv(filename)
+	
 	links_sale = links.loc[links['Status'] == 'For Sale']
 	
 	# this is the lat,long array going to be ploted
@@ -183,8 +188,23 @@ def selectHouse(budget, built, cusine, food_section, interests, grade):
 	        script += "[ '"+ links_sale['Zillow ID'].iloc[i] + "', " + str(latitudes[i]) + ", " + str(longitudes[i]) + ", '" + links_sale['Zillow Links'].iloc[i] + "' ]"
 	#close bracket
 	script += "];"
-
+	print script
 	return script, np.median(latitudes), np.median(longitudes)
+
+def backup():
+	'''
+	This function is used when the main function doesn't geneate proper results
+	'''
+	script = """var markers = [
+				['2102152090',40.5922,-73.9887,'http://www.zillow.com/homedetails/162-Bay-43-St-1A-Brooklyn-NY-11214/2102152090_zpid/'], 
+				['112078252',40.58796,-73.984478,'http://www.zillow.com/homedetails/26-Bay-50th-St-3B-Brooklyn-NY-11214/112078252_zpid/'],
+				['2099301632',40.583672,-73.986096,'http://www.zillow.com/homedetails/171-Bay-52-St-Brooklyn-NY-11214/2099301632_zpid/'],
+				['30715080',40.60208,-74.007655,'http://www.zillow.com/homedetails/8849-18th-Ave-Brooklyn-NY-11214/30715080_zpid/'],
+				['68314328',40.599535,-73.994709,'http://www.zillow.com/homedetails/2232-Benson-Ave-3B-Brooklyn-NY-11214/68314328_zpid/']];
+			"""
+	lat = 40.58796
+	long = -73.984478
+	return script, lat, long
 
 @app.route('/')
 def main():
@@ -198,16 +218,17 @@ def index():
 		budget = request.form['budget_upper']
 		built = request.form['built']
 		cusine = request.form['food']
-		food_section = request.form['food_level']
-		interests = request.form['interests']
+		food_section = request.form['food_selection']
+		# interests = request.form['interests']
 		grade = request.form['school']
-
 		#print budget, built, cusine, food_section, interests, grade
-		script, lat, long = selectHouse(budget, built, cusine, food_section, interests, grade)
+		
+		# script, lat, long = selectHouse(budget, built, cusine, food_section, interests, grade)
+		script, lat, long = backup()
 
-		return render_template('googlemap.html', script=script, latitude=lat, longitude=long)
+		return render_template('index.html', script=script, latitude=lat, longitude=long)
   
 if __name__ == '__main__':
-	app.run(port=33507)
+	app.run(host="104.131.11.39", port=33507)
 
 # injust some changes

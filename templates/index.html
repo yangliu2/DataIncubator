@@ -20,6 +20,9 @@
   <script type="text/javascript"> Bokeh.set_log_level("info");</script>
   -->
 
+  <script src="https://cdn.anychart.com/js/7.11.1/anychart-bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.anychart.com/css/latest/anychart-ui.min.css" />
+
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.js"></script>
   <script type="text/javascript" src="http://panzoto.com/stylefiles/jquery.onepage-scroll.js"></script>
   <link href='http://panzoto.com/stylefiles/onepage-scroll.css' rel='stylesheet' type='text/css'>
@@ -31,6 +34,13 @@
   </script>
 
   <style>
+
+      #container {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
     html {
       height: 100%;
     }
@@ -554,7 +564,8 @@
         </div>
       </section>
 
-            <section class="page2">
+        <!--
+        <section class="page2">
         <div class="page_container">
           <h1>Feature contribution to home price</h1>
           <br><br><br>
@@ -562,6 +573,84 @@
   
         </div>
       </section>
+    -->
+
+      <section class="page2">
+        <div class="page_container">
+          <h1>Feature contribution to home price</h1>
+          <br><br><br>
+            <center><div id="container" style="height: 450px;width: 800px;"></div></center>
+                <script>
+  anychart.onDocumentReady(function() {
+
+  // chart type
+  chart = anychart.column3d();
+
+  // char legend
+  var legend = chart.legend();
+  legend.enabled(true);
+  legend.titleSeparator(true);
+  // set legend position
+  legend.position("right");
+  // set legend align
+  legend.align("top");
+  // set items layout
+  legend.itemsLayout("vertical"); 
+
+  // settings for legend title  
+  var legendTitle = chart.legend().title();
+  legendTitle.useHtml(true);
+  // enables legend title
+  legendTitle.enabled(true);
+  legendTitle.text("Features");
+  // set font size
+  legendTitle.fontSize(14);
+  legendTitle.hAlign("center");
+
+
+  var dataSet = anychart.data.set([
+  //["boro", "crime", "education", "size", "other"]  
+    ["Manhattan",     0.21, 0.28, 0.33, 0.18],
+    ["Bronx",         0.32, 0.21, 0.23, 0.24],
+    ["Brooklyn",      0.24, 0.27, 0.29, 0.20],
+    ["Queens",        0.28, 0.27, 0.26, 0.19],
+    ["Staten Island", 0.30, 0.25, 0.27, 0.18]
+  ]);
+
+  var dataMap2010_1 = dataSet.mapAs({x: [0], value: [1]});
+  var dataMap2010_2 = dataSet.mapAs({x: [0], value: [2]});
+  var dataMap2010_3 = dataSet.mapAs({x: [0], value: [3]});
+  var dataMap2010_4 = dataSet.mapAs({x: [0], value: [4]});
+
+  // set stack mode
+  var scale2010 = chart.yScale();
+  scale2010.stackMode("percent");
+
+
+  // chart title
+  // chart.title("Feature contibution to home price");
+
+  var yAxis = chart.yAxis();
+  yAxis.title("Feature importance");
+
+  var series2010_1 = chart.column(dataMap2010_1);
+  series2010_1.name("Crime");
+  var series2010_2 = chart.column(dataMap2010_2);
+  series2010_2.name("Education");
+  var series2010_3 = chart.column(dataMap2010_3);
+  series2010_3.name("Size");
+  var series2010_4 = chart.column(dataMap2010_4);
+  series2010_4.name("Other");
+
+  // draw
+  chart.container("container");
+  chart.draw();
+});
+              </script>
+  
+        </div>
+      </section>
+
 
       <section class="page3">
         <div class="page_container">
@@ -736,12 +825,11 @@
       <section class="page2">
         <div class="page_container">
           <h1>Recommendations</h1>
-          <div id="map" style="width: 900px; height: 500px;"></div>
+          <center><div id="map" style="width: 900px; height: 450px;"></div></center>
             <script>
 
               function initMap() {
 
-                // var myLatLng = {lat: 40.58796, lng: -73.984478};
                 var myLatLng = {lat: {{ latitude | safe }}, lng: {{ longitude | safe }}};
 
                 var map = new google.maps.Map(document.getElementById('map'), {
@@ -749,47 +837,6 @@
                   center: myLatLng
                 });
 
-                // add each marker
-                /*
-                var marker = new google.maps.Marker({
-                  position: myLatLng,
-                  map: map,
-                  title: 'Zillow Locations',
-                  url: 'http://www.zillow.com/homedetails/115-Bay-Ridge-Ave-Brooklyn-NY-11220/30691966_zpid/'
-                });
-                */
-
-                /*
-                var markers = [
-                    ['2102152090',
-                     40.5922,
-                     -73.9887,
-                     'http://www.zillow.com/homedetails/162-Bay-43-St-1A-Brooklyn-NY-11214/2102152090_zpid/'
-                    ], 
-
-                    ['112078252',
-                     40.58796,
-                     -73.984478,
-                     'http://www.zillow.com/homedetails/26-Bay-50th-St-3B-Brooklyn-NY-11214/112078252_zpid/'
-                    ],
-                    ['2099301632',
-                     40.583672,
-                     -73.986096,
-                     'http://www.zillow.com/homedetails/171-Bay-52-St-Brooklyn-NY-11214/2099301632_zpid/'
-                    ],
-                    ['30715080',
-                     40.60208,
-                     -74.007655,
-                     'http://www.zillow.com/homedetails/171-Bay-52-St-Brooklyn-NY-11214/2099301632_zpid/'
-                    ],
-                    ['68314328',
-                     40.599535,
-                     -73.994709,
-                     'http://www.zillow.com/homedetails/2232-Benson-Ave-3B-Brooklyn-NY-11214/68314328_zpid/'
-                    ]
-                ];
-                */
-                
                 {{ script | safe }}
 
                 for (var i = 0; i < markers.length; i++) {

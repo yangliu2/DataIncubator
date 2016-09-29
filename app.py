@@ -4,6 +4,7 @@ from bokeh.plotting import figure
 from bokeh.embed import components 
 from ediblepickle import checkpoint
 import string
+import logging
 
 import numpy as np
 import pandas as pd
@@ -12,6 +13,7 @@ import os.path
 import io
 import re
 import time
+import sys
 import json
 
 app = Flask(__name__)
@@ -232,3 +234,5 @@ if __name__ == '__main__':
 	app.run(host="104.131.11.39", port=33507)
 
 # injust some changes
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)

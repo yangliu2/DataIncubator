@@ -3,5 +3,4 @@ numpy
 pandas
 bokeh
 beautifulsoup4
-pyzillow
-
+pyzillow: pillow

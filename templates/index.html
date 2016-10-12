@@ -527,8 +527,47 @@
         <div class="page_container">
         <br><br>
           <h1>Manhattan is 4x more expensive</h1>
-          <img src="../static/boro.png" alt="By Neighborhood">
-  
+          <center><div div id="firstChart" style="height: 450px;width: 800px;"></div></center>
+    
+          <script>
+
+            anychart.onDocumentReady(function() {
+
+              // chart type
+              chart = anychart.column();
+                
+              // set data
+              chart.column([
+                ["Manhattan" , 1011],
+                ["Bronx" ,     208],
+                ["Brooklyn" ,  272],
+                ["Queens" ,    294],
+                ["Staten Island " , 244]
+              ]);
+
+              // y axis font size
+              var ylabels = chart.yAxis().labels();
+              ylabels.fontSize(16);
+
+              var yTitle = chart.yAxis().title();
+              yTitle.fontSize(16);              
+
+              // y axis title and size
+              var yAxis = chart.yAxis();
+              yAxis.title("Median Home Price by Square Foot ($)");
+
+              var xlabels = chart.xAxis().labels();
+              xlabels.fontSize(16);
+
+              // chart scale
+              chart.yScale().minimum(0).maximum(1000);
+
+              // draw
+              chart.container("firstChart");
+              chart.draw();
+            });
+
+          </script>
         </div>
       </section>
 
@@ -577,8 +616,22 @@
                   legendTitle.enabled(true);
                   legendTitle.text("Features");
                   // set font size
-                  legendTitle.fontSize(14);
+                  legendTitle.fontSize(18);
                   legendTitle.hAlign("center");
+
+                  // set the legend text size
+                  var legendText = chart.legend();
+                  legendText.fontSize(16);
+
+                  // set the axis label sizes
+                  var xlabels = chart.xAxis().labels();
+                  //labels.fontFamily("Courier");
+                  xlabels.fontSize(16);
+                  
+                  var ylabels = chart.yAxis().labels();
+                  ylabels.fontSize(16);
+                  var yTitle = chart.yAxis().title();
+                  yTitle.fontSize(16);
 
 
                   var dataSet = anychart.data.set([

@@ -54,7 +54,7 @@ def update_zillow(selected_address):
     YOUR_ZILLOW_API_KEY = 'X1-ZWz1fcz57zvjt7_6jziz'
     
     counter = 0
-    for i in range(2):
+    for i in range(len(selected_address)):
 
         # print selected_address.BBLE.iloc[i]
         BBLE = selected_address.BBLE.iloc[i]
@@ -62,7 +62,7 @@ def update_zillow(selected_address):
         
 
         print index, counter
-        if pd.isnull(address.iloc[index].ZILLOW_ID):
+        if pd.isnull(address.iloc[index].ZILLOW_ID) and address.iloc[index].ZILLOW_ID != 'ERROR':
             
             # sometimes zillow API wrapper dones't accept address/zipcode, even though they are strings
             try:
@@ -98,6 +98,7 @@ def update_zillow(selected_address):
                     return
             except:
                 print "error on line", i
+                address['ZILLOW_ID'].iloc[index] = 'ERROR'
                 pass
 
     # save zillow data to database
@@ -130,7 +131,9 @@ def scrape_zillow(selected_address):
         print address.iloc[index].ZILLOW_STATUS, address.iloc[index].ZILLOW_ID
         # print address.iloc[index].ZILLOW_LINK
 
-        if pd.isnull(address.iloc[index].ZILLOW_STATUS) and pd.notnull(address.iloc[index].ZILLOW_ID):
+        if pd.isnull(address.iloc[index].ZILLOW_STATUS) \
+            and pd.notnull(address.iloc[index].ZILLOW_ID) \
+            and address.iloc[index].ZILLOW_ID != 'ERROR':
             
             try: 
                 # scrapying zillow page for school rating
@@ -234,7 +237,7 @@ def selectHouse(budget, built, cusine, food_section, grade):
         selected_address = after_built_year.loc[after_built_year['ZIP'].isin(list(short_list.index))]
 
     # look at zillow API and update database
-    update_zillow(selected_address)
+    # update_zillow(selected_address)
 
     scrape_zillow(selected_address)
     

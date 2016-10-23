@@ -31,13 +31,66 @@
   <link rel="stylesheet" href="../static/d3.slider.css" />
 
   <!-- Other JS plugins can be included here -->
-
+    
+  <!-- This is the question mark tooptip display -->  
   <script>
-    $(document).foundation();
+    $(document).ready(function () {
+    $("span.question").hover(function () {
+    var tooltipText = $(this).attr('text');
+    $(this).append('<div class="tooltip"><p>' + tooltipText + '</p></div>');
+    }, function () {
+    $("div.tooltip").remove();
+    });
+    });
   </script>
-
+    
   <style>
-      #leftcolumn { width: 200px; float: left; display:inline;}
+          span.question {
+              cursor: pointer;
+              display: inline-block;
+              width: 16px;
+              height: 16px;
+              background-color: #89A4CC;
+              line-height: 16px;
+              color: White;
+              font-size: 13px;
+              font-weight: bold;
+              border-radius: 8px;
+              text-align: center;
+              position: relative;
+            }
+            span.question:hover { background-color: #3D6199; }
+            div.tooltip {
+              background-color: #3D6199;
+              color: White;
+              position: absolute;
+              left: 25px;
+              top: -25px;
+              z-index: 1000000;
+              width: 250px;
+              border-radius: 5px;
+            }
+            div.tooltip:before {
+              border-color: transparent #3D6199 transparent transparent;
+              border-right: 6px solid #3D6199;
+              border-style: solid;
+              border-width: 6px 6px 6px 0px;
+              content: "";
+              display: block;
+              height: 0;
+              width: 0;
+              line-height: 0;
+              position: absolute;
+              top: 40%;
+              left: -6px;
+            }
+            div.tooltip p {
+              margin: 10px;
+              color: White;
+            }
+
+      
+      #leftcolumn { width: 200px; float: left; display:inline;height=30px;}
       #middlecolumn { width: 300px; float: left}
       #rightcolumn { width: 300px; float: right}
 
@@ -686,10 +739,14 @@
             <form id='input' method='post' action='index'>
 
               <div id=linebreaker>
+                  
                 <div id=leftcolumn>
                   <b>Budget</b>
+                    <span class="question", text="Select the upper limit of your budget for your home. The slider indicate how important the budget is to you.">?</span>                    
                 </div>
+
                 <div id=middlecolumn>
+                    
                   <select name="budget_upper" form="input">
                     <option value="200000">Less than $200,000</option>
                     <option value="250000">$250,000</option>
@@ -707,9 +764,11 @@
                     <option value="850000">$850,000</option>
                     <option value="900000">$900,000</option>
                     <option value="950000">$950,000</option>
-                    <option value="10000000">More than 1 million</option>   
+                    <option value="10000000">More than 1 million</option> 
+                      
                   </select>
                 </div>
+                  
                 <div id=rightcolumn class=slider-width100>
                   Min &nbsp;&nbsp;<input type="range" min="1" max="10" value="5" />&nbsp;&nbsp;Max
                 </div>
@@ -720,6 +779,7 @@
               <div id=linebreaker>
                 <div id=leftcolumn>
                   <b>School grade</b>
+                    <span class="question", text="Select the education rank you can accept. The slider indicate how important public school education is to you.">?</span>                    
                 </div>
                 <div id=middlecolumn>
                   <select name="school" form="input">
@@ -744,6 +804,7 @@
               <div id=linebreaker>
                 <div id=leftcolumn>
                   <b>Crime rate filter</b>
+                    <span class="question", text="Select the category of crime rate you want to filter the suggestions. The slider indicate how important crime rate is to you.">?</span>
                 </div>
                 <div id=middlecolumn>
                   <select name="crime" form="input">
@@ -760,6 +821,7 @@
               <div id=linebreaker>
                 <div id=leftcolumn>
                   <b>Traffic time</b>
+                    <span class="question", text="Select the how long the commute time if acceptable. The slider indicate how important commute time is to you.">?</span>
                 </div>
                 <div id=middlecolumn>
                   <select name="built" form="input">
@@ -778,6 +840,7 @@
               <div id=linebreaker>
                 <div id=leftcolumn>
                   <b>Year built after</b>
+                    <span class="question", text="Select the earliest built year you can accept. The slider indicate how important building age is to you.">?</span>
                 </div>
                 <div id=middlecolumn>
                   <select name="built" form="input">
@@ -806,6 +869,8 @@
               <div id=linebreaker>
                 <div id=leftcolumn>
                   <b>Food preference</b>
+                    <span class="question", text="Select the food preference if you have one. Leave it if you don't. The slider indicate how important food preference is to you.">?</span>
+
                 </div>
                 <div id=middlecolumn>
                   <select name="food" form="input">

@@ -90,7 +90,7 @@ def update_zillow(selected_address):
                 
                 # check if querried Zillow 1000 times, quit if exceeded limit
                 counter += 1
-                if counter > 100:
+                if counter > 1000:
 
                     # save zillow data to database
                     filename = 'address_book.csv'
@@ -123,7 +123,7 @@ def scrape_zillow(selected_address):
         search_length = 1000
     else:
         search_length = len(selected_address)
-    for i in range(search_length):
+    for i in range(len(selected_address)):
 
         BBLE = selected_address.BBLE.iloc[i]
         index = selected_address[selected_address['BBLE'] == BBLE].index.values[0]
@@ -237,7 +237,7 @@ def selectHouse(budget, built, cusine, food_section, grade):
         selected_address = after_built_year.loc[after_built_year['ZIP'].isin(list(short_list.index))]
 
     # look at zillow API and update database
-    # update_zillow(selected_address)
+    update_zillow(selected_address)
 
     scrape_zillow(selected_address)
     
